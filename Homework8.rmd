@@ -1,0 +1,118 @@
+---
+title: "Data 605 Homework 8"
+author: "Trishita Nath"
+date: "3/20/2021"
+output: html_document
+---
+
+## Question 11 (Page 303)
+A company buys 100 lightbulbs, each of which has an exponential lifetime of
+1000 hours. What is the expected time for the flrst of these bulbs to burn
+out? 
+
+**Answer**
+
+From Exercise 10, for n independent random variables that have an exponential density and mean μ, the minimum value M is exponential density with a mean as $\frac{\mu}{n}$
+For any of the bulbs i, let its independent random variable $X_i$ be:
+$$
+E[X_i] = \frac{1}{\lambda_i} = 1000 \\
+Since X_i \ is \ given\ as\ exponential,\ we\ have: \\
+minX_1,X_2,\dots, X_100\sim e^{\sum_{i = 1}^{100}{\lambda_i}} \\
+\sum_{i = 1}^{100}{\lambda_i} = 100 \times\ \frac{1}{1000} = \frac{1}{10} \\
+E[minX_i] = \frac{1}{\frac{1}{10}} = 10 \ years
+$$
+
+## Question 11 (Page 303)
+Assume that X~1~ and X~2~ are independent random variables, each having an
+exponential density with parameter ‚. Show that Z = X~1~ - X~2~ has density:
+$f_Z(z) = (\frac{\lambda}{2}) e^{-\lambda |z|}$
+
+**Answer**
+
+Both X~1~ and X~2~ are evaluated on the interval $0\le\infty$. Since X2 is subtracted we can evaluate the convolution of X~1~ and X~2~ into two parts, $-\infty\to 0$ when X~2~ ≥ X~1~ and $0\to\infty$ when X~1~ ≥ X~2~
+
+For X~1~ ≥ X~2~: 
+$$
+f_Z(z) = \int_{-\infty}^\infty {f_{X_1}(z+x_2)f_{X_2}(x_2)} \,dx_2 \\
+f_Z(z) = \int_{0}^\infty {\lambda e^{-\lambda(z+x_2)} \lambda e^{-\lambda x_2}} \,dx_2 \\
+f_Z(z) = \int_{0}^\infty {\lambda e^{-\lambda(z)} \lambda e^{-2\lambda x_2}} \,dx_2 \\
+f_Z(z) = \lambda^2 e^{-\lambda z} (\int_{0}^\infty {\lambda e^{-\lambda x_2}} \,dx_2) \\
+f_Z(z) = \lambda^2 e^{-\lambda z} (\frac{1}{2\lambda}) \\
+f_Z(z) = \frac{\lambda}{2} (e^{-\lambda z})
+$$
+
+For X~2~ ≥ X~1~: 
+$$
+f_Z(z) = \int_{-\infty}^\infty {f_{X_1}(z+x_2)f_{X_2}(x_2)} \,dx_2 \\
+f_Z(z) = \int_{-\infty}^0 {\lambda e^{-\lambda(z+x_2)} \lambda e^{-\lambda x_2}} \,dx_2 \\
+f_Z(z) = \int_{-\infty}^0 {\lambda e^{-\lambda(z)} \lambda e^{-2\lambda x_2}} \,dx_2 \\
+f_Z(z) = \lambda^2 e^{-\lambda z} (\int_{-\infty}^0 {\lambda e^{-\lambda x_2}} \,dx_2) \\
+f_Z(z) = \lambda^2 e^{-\lambda z} (\frac{-1}{2\lambda}) \\
+f_Z(z) = \frac{-\lambda}{2} (e^{-\lambda z})
+$$
+These can be combined as follows:
+$$
+\begin{equation}
+f(z) = 
+\begin{cases} 
+\frac{\lambda}{2} (e^{-\lambda z}) & \text z \geq 0 \\
+\frac{-\lambda}{2} (e^{-\lambda z}) & \text z \lt 0
+\end{cases}
+\end{equation}
+$$
+This can be ssummarized as:
+$$
+f_Z(z) = (\frac{\lambda}{2}) e^{-\lambda |z|}
+$$
+
+## Question 1 (Page 320-321)
+Let X be a continuous random variable with mean $\mu$= 10 and variance $\sigma^2$ = $\frac{100}{3}$. Using Chebyshev’s Inequality, find an upper bound for the following probabilities:
+
+**Solution**
+
+Chebyshev inequality: \
+$P(|X−\mu| \ge \epsilon) \le\frac{\sigma^2}{\epsilon^2}$ \
+In this case, $u = 10$ and $\sigma = \sqrt{\frac{100}{3}} = \frac{10}{3}$
+$\epsilon=k\sigma$, hence $k=\frac{\epsilon}{\sigma} = \frac{\epsilon \sqrt 3}{10}$ \
+Let $u$ be the upper bound in Chebyshev inequaity \
+Then, $u=\frac{1}{k^2} = \frac{1}{(\frac{\epsilon \sqrt 3}{10})^2} = \frac{100}{3\epsilon^2}$ \
+
+a) P(|X - 10| $\ge$ 2)
+
+**Answer**  
+$\epsilon=2$, upper bound: $u = \frac{100}{3\epsilon^2} = \frac{100}{3\times2^2}$
+```{r echo=TRUE}
+epsilon1 <- 2
+upper_bound1 = 100 / (3 * epsilon1 ^2)
+upper_bound1
+```
+
+b) P(|X - 10| $\ge$ 5)
+
+**Answer**  
+$\epsilon=2$, upper bound: $u = \frac{100}{3\epsilon^2} = \frac{100}{3\times5^2}$
+```{r echo=TRUE}
+epsilon2 <- 5
+upper_bound1 = 100 / (3 * epsilon2 ^2)
+upper_bound1
+```
+
+c) P(|X - 10| $\ge$ 9)
+
+**Answer**  
+$\epsilon=2$, upper bound: $u = \frac{100}{3\epsilon^2} = \frac{100}{3\times9^2}$
+```{r echo=TRUE}
+epsilon3 <- 9
+upper_bound1 = 100 / (3 * epsilon3 ^2)
+upper_bound1
+```
+
+d) P(|X - 10| $\ge$ 20)
+
+**Answer**  
+$\epsilon=2$, upper bound: $u = \frac{100}{3\epsilon^2} = \frac{100}{3\times20^2}$
+```{r echo=TRUE}
+epsilon4 <- 20
+upper_bound1 = 100 / (3 * epsilon4 ^2)
+upper_bound1
+```
