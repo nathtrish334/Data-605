@@ -1,0 +1,52 @@
+---
+title: "Data 605 Homework 10"
+author: "Trishita Nath"
+date: "4/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Smith is in jail and has 1 dollar; he can get out on bail if he has 8 dollars.
+A guard agrees to make a series of bets with him. If Smith bets A dollars,
+he wins A dollars with probability .4 and loses A dollars with probability .6.
+Find the probability that he wins 8 dollars before losing all of his money if
+
+a. he bets 1 dollar each time (timid strategy).  
+
+We utilize the Gambler’s Ruin equation: 
+The gambler starts with a stake of size s and plays until their stake reaches the value M = 0  
+$$
+P_{broke} = \frac{(\frac{q}{p})^z-(\frac{q}{p})^M}{(1-\frac{q}{p})^M} \\
+P_{win} = 1 - P_{broke}
+$$
+M=8, z=1, p=0.4, and q=0.6, since the probability of Smith winning A dollars is 0.4, losing A dollars is 0.6, Smith starts with a stake of 1 (1 dollar), and it’ll be played until Smith reaches a capital of 8  
+
+$$
+= 1 - \frac{(\frac{0.6}{0.4})^1-(\frac{q}{p})^8}{(1-\frac{0.6}{0.4})^8} \\
+$$
+```{r}
+1 - ((1.5-(1.5^8)) / (1-(1.5^8)))
+```
+
+b. he bets, each time, as much as possible but not more than necessary to
+bring his fortune up to 8 dollars (bold strategy).  
+
+Here, as a bold move, Smith bets the whole amount, upto \$8. He starts with 1 dollar and must win 3 times in a row with probability 0.4
+
+He places \$1 and wins to get \$2. He then places the \$2 and wins, to get \$4. Finally, if he places the \$4 and wins, they make \$8.
+
+
+The probability of 3 successes in a row is
+
+```{r}
+0.4 ^ 3
+```
+
+
+c. Which strategy gives Smith the better chance of getting out of jail?  
+
+The bold strategy has a better chance of winning because it requires only 3 moves and has higher probability.
