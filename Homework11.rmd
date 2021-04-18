@@ -1,0 +1,96 @@
+---
+title: "Data 605 Homework 11"
+author: "Trishita Nath"
+date: "4/18/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+Using the “cars” dataset in R, build a linear model for stopping distance as a function of speed and replicate the analysis of your textbook chapter 3 (visualization, quality evaluation of the model, and
+residual analysis.)
+
+### Dataset
+
+The cars dataset has two columns - “speed”" and “dist” that relate the car speed and the distance it takes for a car to stop
+
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+```{r cars}
+summary(cars)
+```
+
+## Visualization
+
+Speed is the predictor variable and stopping distance is the system response.
+
+```{r echo=TRUE, eval=TRUE}
+plot(cars$speed, cars$dist, xlab='Speed', ylab='Stopping Distance', 
+     main='Stopping Distance vs. Speed')
+
+# A linear model
+cars_linear <- lm(cars$dist ~ cars$speed)
+cars_linear
+
+# Line of best fit.
+plot(cars$speed, cars$dist, xlab='Speed', ylab='Stopping Distance', 
+     main='Stopping Distance vs. Speed')
+abline(cars_linear)
+```
+
+### Linear Model
+
+```{r echo=TRUE, eval=TRUE}
+# A linear model
+cars_linear <- lm(cars$dist ~ cars$speed)
+cars_linear
+
+# Line of best fit.
+plot(cars$speed, cars$dist, xlab='Speed', ylab='Stopping Distance', 
+     main='Stopping Distance vs. Speed')
+abline(cars_linear)
+
+# Evaluation of the Linear Model
+summary(cars_linear)
+```
+
+## Quality Evaluation of the Model
+
+a) The standard error for the speed coefficient is ~ 9.4 (3.93/.42) times the coefficient value, which is good as explained in the book.
+
+b) Speed is very relevant in modeling stopping distance because the probability that the speed coefficient is not relevant in the model is p-value = 1.49e-12
+
+c) The intercept pretty relevant in the model: p-value of the intercept is 0.0123.
+
+d) The model explains 65.11% of the data’s variation: multiple R-squared = 0.6511
+
+e) From the residuals distribution, the distribution is normal.
+
+## Residual Analysis
+
+```{r echo=TRUE, eval=TRUE}
+plot(cars_linear$fitted.values, cars_linear$residuals, xlab='Fitted Values', ylab='Residuals')
+abline(0,0)
+```
+
+The linear model of the cars is normally distributed around zero; it does seem to overpredict more than it underpredicts. Due to the small dataset, this might be smoothed out in a larger model
+
+### Normal Q-Q Plot
+
+```{r echo=TRUE, eval=TRUE}
+qqnorm(cars_linear$residuals)
+qqline(cars_linear$residuals)
+```
+
+From the Q-Q plot, there is some divergent at the very end of the upper tail, but most of the residuals are tightly packed and well-distributed across  and about the line. This implies a largely normal distribution.
+
+## Conclusion
+
+From the overall analysis speed is a good predictor of distance and our model is a well fitted model that satisfies the assumptions of a linear regression model.
