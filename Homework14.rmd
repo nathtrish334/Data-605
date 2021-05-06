@@ -1,0 +1,78 @@
+---
+title: "Data 605 Homework 14"
+author: "Trishita Nath"
+date: "5/6/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+This week, we'll work out some Taylor Series expansions of popular functions.
+
+* $f(x) = \frac{1}{(1-x)}$
+
+* $f(x) = e^x$
+
+* $f(x) = \ln(1 + x)$
+
+For each function, only consider its valid ranges as indicated in the notes when you are computing the Taylor Series expansion. Please submit your assignment as a R-Markdown document.
+
+## Function 1.
+Taylor Series centered about $k$ is given by the formula:  
+\begin{gather*}
+f(x) = f(k) + f'(k)(x-k) + \frac{f''(k)}{2!} + \cdot\cdot\cdot \\
+= \sum_{n=0}^{\infty}\frac{f^{(n)}(k)}{n!}x^n
+\end{gather*}
+
+If k=0 (centered about 0) it forms a Maclaurin Series:  
+
+\begin{gather*}
+1 + x + x^2 + x^3 + \cdot\cdot\cdot \\
+= \sum_{n = 0}^{\infty}x^n \ \ \ x \in (-1, 1)
+\end{gather*}
+
+This forms a geometric series.
+
+
+## Function 2.
+
+Any derivative of $f(x) = e^x$ is $e^x$  
+
+Hence:  
+$f^{(n)}(x)=e^x$  
+
+When centered about 0:  
+
+$f^{(n)}(0)=1$  
+
+Using Maclaurin Series:  
+
+\begin{gather*}
+1 +  \frac{1}{1!}x^1 + \frac{1}{2!}x^2 + \frac{1}{3!}x^3 + \frac{1}{4!}x^4 + \cdot\cdot\cdot \\
+= \sum_{n = 0}^{\infty}(-1)^{n+1}\frac{x^n}{n} = \sum_{n = 0}^{\infty}(-1)^{n-1}\frac{x^n}{n} \ \ \ x \in (-1, 1]
+\end{gather*}
+
+\begin{gather*}
+1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdot\cdot\cdot \\
+= \sum_{n = 0}^{\infty} \frac{x^n}{n!} \ \ \ x \in \mathbb{R}
+\end{gather*}
+
+## Function 3.
+
+The first four derivatives of at $x=0$:  
+$f(x) = ln(x)$ &rightarrow;$f(0) = 0$  
+$f^{(1)}(x) = \frac{1}{1+x}$ &rightarrow;$f^{(1)}(0) = 1$  
+$f^{(2)}(x) = \frac{-1}{(1+x)^2}$ &rightarrow;$f^{(2)}(0) = -1$    
+$f^{(3)}(x) = \frac{2}{(1+x)^3}$ &rightarrow;$f^{(3)}(0) = 2$  
+$f^{(4)}(x) = \frac{-6}{(1+x)^4}$ &rightarrow;$f^{(4)}(0) = -6$  
+
+At $x=0$ Taylor's Series becomes Maclaurin Series:
+
+\begin{gather*}
+0 + x - \frac{1}{2!}x^2 + \frac{2}{3!}x^3 - \frac{6}{4!}x^4 + \cdot\cdot\cdot \\
+= \sum_{n = 0}^{\infty}(-1)^{n+1}\frac{x^n}{n} = \sum_{n = 0}^{\infty}(-1)^{n-1}\frac{x^n}{n} \ \ \ x \in (-1, 1]
+\end{gather*}
